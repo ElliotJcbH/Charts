@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="50dp"
+    android:id="@+id/drawer_header"
+    >
+
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/profile_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/profilepicture"
+        android:clipToOutline="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/profile_picture"
+        app:layout_constraintBottom_toBottomOf="@id/profile_picture"
+        app:layout_constraintStart_toEndOf="@id/profile_picture"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:text="rokketo"
+            android:textSize="24sp"
+            android:textColor="@color/text"
+            android:textAlignment="viewStart"
+            android:fontFamily="@font/sentient_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            />
+
+        <TextView
+            android:id="@+id/email"
+            android:text="elliot.jacob09@gmail.com"
+            android:textSize="14sp"
+            android:textColor="@color/text2"
+            android:textAlignment="viewStart"
+            android:fontFamily="@font/satoshi_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="-3dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/profile_name_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp"
+        >
+
+        <TextView
+            android:text="Classic Rock Fan"
+            android:textColor="@color/flair2_text"
+            android:fontFamily="@font/satoshi_medium"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/pill"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="8dp"
+            android:layout_marginTop="3dp"
+            />
+
+        <TextView
+            android:text="Hip-Hop Head"
+            android:textColor="@color/flair2_text"
+            android:fontFamily="@font/satoshi_medium"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/pill"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="3dp"
+            />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_name_container"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/divider_color"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
