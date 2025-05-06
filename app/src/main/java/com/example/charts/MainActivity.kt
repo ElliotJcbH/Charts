@@ -62,6 +62,27 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.drawer_layout)
         drawer = findViewById(R.id.profile_drawer)
+        drawer.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.myReviews -> {
+                    loadFragment(MyReviewsFragment()) // Create this fragment
+                    true
+                }
+                R.id.Friends -> {
+                    loadFragment(FriendsFragment()) // Create this fragment
+                    true
+                }
+                R.id.Connections -> {
+                    loadFragment(ConnectionsFragment()) // Create this fragment
+                    true
+                }
+                else -> false
+            }.also { handled ->
+                if (handled) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+            }
+        }
 
         val drawerHeader = drawer.findViewById<ConstraintLayout>(R.id.drawer_header)
 

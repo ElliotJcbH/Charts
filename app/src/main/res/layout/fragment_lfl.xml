@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:paddingHorizontal="15dp"
+
+    >
+
+
+    <!-- 5th Album -->
+    <TextView
+        android:id="@+id/titleAlbum5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Queen of Heartbreak 💔"
+        android:paddingBottom="20dp"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <ImageView
+        android:id="@+id/imgAlbumBack7"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lufol"
+        android:alpha="0.4"
+        android:translationX="-50dp"
+        android:translationY="15dp"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toBottomOf="@id/titleAlbum5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgAlbumBack8"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lufol"
+        android:alpha="0.6"
+        android:translationX="50dp"
+        android:translationY="15dp"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toTopOf="@id/imgAlbumBack7"
+        app:layout_constraintStart_toStartOf="@id/imgAlbumBack7"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbumBack7"/>
+
+    <ImageView
+        android:id="@+id/imgAlbum5"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lufol"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toTopOf="@id/imgAlbumBack8"
+        app:layout_constraintStart_toStartOf="@id/imgAlbumBack8"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbumBack8"/>
+
+    <ImageView
+        android:id="@+id/btnPlay5"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/round_button_background"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_play_button"
+        app:layout_constraintBottom_toBottomOf="@id/imgAlbum5"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbum5"
+        android:onClick="openSpotifyAlbum"/>
+
+    <TextView
+        android:id="@+id/descText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lana Del Rey has captured the essence of lost love and desire with Lust for Love. Her cinematic sound takes listeners deep into the world of heartache and longing."
+        android:textSize="14sp"
+        android:fontFamily="@font/satoshi_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/imgAlbum5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/infoContainer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/descText5"
+        app:layout_constraintStart_toStartOf="parent">
+        <!-- Artist -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_artist"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lana Del Rey"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+        <!-- Songs -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_song"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 Songs"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+        <!-- Reviews -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_reviews"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6.2M Reviews"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

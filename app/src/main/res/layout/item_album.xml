@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@color/accent_gray">
+
+    <!-- First Album -->
+    <ImageView
+        android:id="@+id/albumCover1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/igor"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/albumRank1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#1"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover1"
+        app:layout_constraintTop_toTopOf="@id/albumCover1"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Igor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank1"
+        app:layout_constraintTop_toTopOf="@id/albumCover1"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tyler, the Creator"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank1"
+        app:layout_constraintTop_toBottomOf="@id/albumRank1" />
+
+    <!-- Duplicated Structure for Other Albums -->
+
+    <ImageView
+        android:id="@+id/albumCover2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/in_utero"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover1"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#2"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover2"
+        app:layout_constraintTop_toTopOf="@id/albumCover2"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In Utero"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank2"
+        app:layout_constraintTop_toTopOf="@id/albumCover2"
+        android:layout_marginStart="5dp"
+        />
+
+
+    <TextView
+        android:id="@+id/albumArtist2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nirvana"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank2"
+        app:layout_constraintTop_toBottomOf="@id/albumRank2" />
+
+    <ImageView
+        android:id="@+id/albumCover3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/abbey_road"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover2"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#3"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover3"
+        app:layout_constraintTop_toTopOf="@id/albumCover3"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abbey Road"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank3"
+        app:layout_constraintTop_toTopOf="@id/albumCover3"
+        android:layout_marginStart="5dp"
+        />
+
+
+    <TextView
+        android:id="@+id/albumArtist3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Beatles"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank3"
+        app:layout_constraintTop_toBottomOf="@id/albumRank3" />
+
+    <ImageView
+        android:id="@+id/albumCover4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/night_at_the_opera"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover3"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#4"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover4"
+        app:layout_constraintTop_toTopOf="@id/albumCover4"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A Night at the Opera"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank4"
+        app:layout_constraintTop_toTopOf="@id/albumCover4"
+        android:layout_marginStart="5dp"
+        />
+
+
+    <TextView
+        android:id="@+id/albumArtist4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Queen"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank4"
+        app:layout_constraintTop_toBottomOf="@id/albumRank4" />
+
+    <ImageView
+        android:id="@+id/albumCover5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ta13oo"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover4"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#5"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover5"
+        app:layout_constraintTop_toTopOf="@id/albumCover5"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ta13oo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank5"
+        app:layout_constraintTop_toTopOf="@id/albumCover5"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Denzel Curry"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank5"
+        app:layout_constraintTop_toBottomOf="@id/albumRank5" />
+
+    <!---6th album-->
+    <ImageView
+        android:id="@+id/albumCover6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/astro"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover5"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#6"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover6"
+        app:layout_constraintTop_toTopOf="@id/albumCover6"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ASTROWORLD"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank6"
+        app:layout_constraintTop_toTopOf="@id/albumCover6"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travis Scott"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank6"
+        app:layout_constraintTop_toBottomOf="@id/albumRank6" />
+
+    <!---7th album-->
+    <ImageView
+        android:id="@+id/albumCover7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/nectar"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover6"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover7"
+        app:layout_constraintTop_toTopOf="@id/albumCover7"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nectar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank7"
+        app:layout_constraintTop_toTopOf="@id/albumCover7"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joji"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank7"
+        app:layout_constraintTop_toBottomOf="@id/albumRank7" />
+
+    <!---8th album-->
+    <ImageView
+        android:id="@+id/albumCover8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/lufol"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover7"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#8"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover8"
+        app:layout_constraintTop_toTopOf="@id/albumCover8"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lust For Love"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank8"
+        app:layout_constraintTop_toTopOf="@id/albumCover8"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lana Del Rey"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank8"
+        app:layout_constraintTop_toBottomOf="@id/albumRank8" />
+
+    <!---9th album-->
+    <ImageView
+        android:id="@+id/albumCover9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/starboy"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover8"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#9"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover9"
+        app:layout_constraintTop_toTopOf="@id/albumCover9"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Starboy"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank9"
+        app:layout_constraintTop_toTopOf="@id/albumCover9"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Weeknd"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank9"
+        app:layout_constraintTop_toBottomOf="@id/albumRank9" />
+
+    <!---10th album-->
+    <ImageView
+        android:id="@+id/albumCover10"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/gnx"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover9"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/albumRank10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#10"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#9F9F9F"
+        app:layout_constraintStart_toEndOf="@id/albumCover10"
+        app:layout_constraintTop_toTopOf="@id/albumCover10"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/albumTitle10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GNX"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/albumRank10"
+        app:layout_constraintTop_toTopOf="@id/albumCover10"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:id="@+id/albumArtist10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kendrick Lamar"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/albumRank10"
+        app:layout_constraintTop_toBottomOf="@id/albumRank10" />
+</androidx.constraintlayout.widget.ConstraintLayout>

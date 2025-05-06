@@ -24,7 +24,7 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:src="@drawable/charts_serif"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/menu"
                 android:layout_width="40dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:src="@drawable/menu_icon"
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/notifications"
                 android:layout_width="40dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:src="@drawable/notification_icon"
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toStartOf="@id/menu"
@@ -65,7 +65,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:background="@drawable/bottomnav"
             android:backgroundTint="@color/accent_gray"
             app:itemBackground="@color/transparent"
@@ -74,7 +74,6 @@
             app:itemTextAppearanceActive="@style/BottomNavTextAppearanceActive"
             app:menu="@menu/bottomnav"
 
-            app:itemPaddingTop="30dp"
             app:itemPaddingBottom="15dp"
             app:itemActiveIndicatorStyle="@android:color/transparent"
             app:itemIconTint="@color/text"

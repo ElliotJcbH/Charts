@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/profile_name"
             android:text="rokketo"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/text"
             android:textAlignment="viewStart"
             android:fontFamily="@font/sentient_bold"

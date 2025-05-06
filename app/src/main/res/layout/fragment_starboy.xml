@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:paddingHorizontal="15dp"
+
+    >
+
+
+    <!-- 6th Album -->
+    <TextView
+        android:id="@+id/titleAlbum6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" On Everyone’s Playlist 🎶"
+        android:textSize="24sp"
+        android:paddingBottom="20dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:fontFamily="@font/satoshi_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <ImageView
+        android:id="@+id/imgAlbumBack9"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/starboy"
+        android:alpha="0.4"
+        android:translationX="-50dp"
+        android:translationY="15dp"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toBottomOf="@id/titleAlbum6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgAlbumBack10"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/starboy"
+        android:alpha="0.6"
+        android:translationX="50dp"
+        android:translationY="15dp"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toTopOf="@id/imgAlbumBack9"
+        app:layout_constraintStart_toStartOf="@id/imgAlbumBack9"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbumBack9"/>
+
+    <ImageView
+        android:id="@+id/imgAlbum6"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/starboy"
+        android:background="@drawable/rounded_album"
+        app:layout_constraintTop_toTopOf="@id/imgAlbumBack10"
+        app:layout_constraintStart_toStartOf="@id/imgAlbumBack10"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbumBack10"/>
+
+    <ImageView
+        android:id="@+id/btnPlay6"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/round_button_background"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_play_button"
+        app:layout_constraintBottom_toBottomOf="@id/imgAlbum6"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbum6"
+        android:onClick="openSpotifyAlbum"/>
+
+    <TextView
+        android:id="@+id/descText6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Weeknd brings his signature blend of dark vibes and electrifying beats with Starboy—a journey through fame, love, and everything in between."
+        android:textSize="14sp"
+        android:fontFamily="@font/satoshi_regular"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/imgAlbum6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/infoContainer6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintTop_toBottomOf="@id/descText6"
+        app:layout_constraintStart_toStartOf="parent">
+        <!-- Artist -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_artist"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Weeknd"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+        <!-- Songs -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_song"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18 Songs"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+        <!-- Reviews -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_reviews"
+                app:tint="#858585"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12.2M Reviews"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
