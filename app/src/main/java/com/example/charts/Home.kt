@@ -60,6 +60,28 @@ class Home : Fragment() {
                     // You might also show a Toast or a Dialog
                 }
             }
+
+            try {
+                val artist = withContext(Dispatchers.IO) {
+                    fetch_full_artist_info("98c13327-681c-495e-b792-04f505fe0d25")
+                }
+
+                withContext(Dispatchers.Main) {
+                    if(artist != null) {
+                        Log.d("Successfully fetched artist", " ${artist}")
+                    } else {
+                        Log.d("That artist does not exist", "asdasd")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    // Display an error message to the user
+//                    statusTextView.text = "Error fetching albums: ${e.message}"
+                    Log.e("HomeFragment", "Error fetching top 10 albums", e)
+                    throw(e)
+                    // You might also show a Toast or a Dialog
+                }
+            }
         }
     }
 

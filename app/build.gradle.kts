@@ -1,7 +1,14 @@
+//plugins {
+//    alias(libs.plugins.android.application)
+//    alias(libs.plugins.kotlin.android)
+//    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
+//}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
+    // Update the Kotlin version here
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0" // Use 2.0.0 or the latest stable
 }
 
 android {

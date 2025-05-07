@@ -127,7 +127,7 @@
                             android:text="Popular"
                             android:textColor="@color/text"
                             android:textSize="24sp"
-                            android:fontFamily="@font/sentient_bold"
+                            android:fontFamily="@font/satoshi_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             />
@@ -136,7 +136,7 @@
                             android:text="Now"
                             android:textColor="@color/text2"
                             android:textSize="24sp"
-                            android:fontFamily="@font/sentient_bold"
+                            android:fontFamily="@font/satoshi_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"

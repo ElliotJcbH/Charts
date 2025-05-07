@@ -1,6 +1,8 @@
 package com.example.charts
 
 import kotlinx.datetime.DateTimePeriod
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 import org.w3c.dom.Comment
 
@@ -11,7 +13,7 @@ data class Friend( // review encompasses everything
     val album_id: String,
     val title: String,
     val content: String,
-    val date: DateTimePeriod, // the review date
+    val date: LocalDateTime, // the review date
     val likes: Array<String>,
     val comments: Array<Comment>,
     val favorite_lyrics: String,

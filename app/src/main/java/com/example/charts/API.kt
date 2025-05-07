@@ -128,6 +128,16 @@ suspend fun fetch_reviews_for_album(album_id: String): List<Review> = coroutineS
     }
 }
 
+suspend fun fetch_album(album_id: String): AlbumInfo = coroutineScope {
+    try {
+        val album = supabase.from("album_info").select().decodeSingle<AlbumInfo>()
+        return@coroutineScope album
+    } catch (e: Exception) {
+        print("Error fetching album: ${e.message}")
+        throw(e)
+    }
+}
+
 suspend fun find_albums(album_name: String): List<AlbumInfo> = coroutineScope {
     try {
         val rpcParams = buildJsonObject {
@@ -144,6 +154,26 @@ suspend fun find_albums(album_name: String): List<AlbumInfo> = coroutineScope {
         return@coroutineScope albums
     } catch (e: Exception) {
         print("Error fetching search: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun fetch_discography(artist_id: String): List<AlbumInfo> = coroutineScope {
+    try {
+        val rpcParams = buildJsonObject {
+            put("input_artist_id", artist_id)
+        }
+
+        val res = supabase.postgrest.rpc(
+            "get_discography",
+            parameters = rpcParams
+        )
+
+        val discography = res.decodeList<AlbumInfo>()
+        print(discography)
+        return@coroutineScope discography
+    } catch(e: Exception) {
+        print("Error fetching discography: ${e.message}")
         throw(e)
     }
 }
