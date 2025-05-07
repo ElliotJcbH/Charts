@@ -1,5 +1,7 @@
 package com.example.charts
 
+import android.util.Log
+import io.github.jan.supabase.auth.OtpType
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.user.UserInfo
@@ -35,3 +37,20 @@ suspend fun signin_user(myEmail: String, myPassword: String): Result<Unit> {
     }
 }
 
+suspend fun verify_user(myEmail: String, myToken: String): Result<Unit> {
+    try {
+        val res = supabase.auth.verifyEmailOtp(type = OtpType.Email.EMAIL, email = "example@email.com", token = "token")
+
+        return Result.success(res)
+
+    } catch (e: Exception) {
+        print("Verification Error: ${e.message}")
+        throw(e)
+    }
+}
+
+//suspend fun create_user_record(username: String): Result<Unit> {
+//    try {
+//        val res = User
+//    }
+//}

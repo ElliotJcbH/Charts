@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
@@ -26,6 +27,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.async
@@ -51,18 +53,17 @@ class MainActivity : AppCompatActivity() {
 
         setStatusBarColor(window, R.color.accent_gray)
 
+        val session = supabase.auth.currentSessionOrNull()
+        if(session == null) {
+            val intent = Intent(this, Register::class.java)
+            Log.d("No Session", "Session does not exist")
+            startActivity(intent)
+            finish()
+        }
+
         if (savedInstanceState == null) {
             loadFragment(Home())
         }
-
-        val email = intent.getStringExtra("email")
-
-//        if(email == null) {
-//            val intent = Intent(this, Register::class.java)
-//
-//            startActivity(intent)
-//            finish()
-//        }
 
         drawerLayout = findViewById(R.id.drawer_layout)
         drawer = findViewById(R.id.profile_drawer)
@@ -89,9 +90,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val drawerHeader = drawer.findViewById<ConstraintLayout>(R.id.drawer_header)
-
-//        val emailText = drawerHeader.findViewById<TextView>(R.id.email)
-//        emailText.setText(email)
 
         bottomNav = findViewById(R.id.bottom_nav)
         bottomNav.setOnItemSelectedListener { item ->
