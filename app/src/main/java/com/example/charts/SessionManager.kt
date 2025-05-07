@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.status.SessionStatus
 import kotlinx.coroutines.launch
 
-class Verification : AppCompatActivity() {
+class SessionManager : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +27,7 @@ class Verification : AppCompatActivity() {
                             // Handle initialization state
                         }
                         is SessionStatus.RefreshFailure -> {
-//                            Log.d("AuthState", "SessionStatus: RefreshFailure", status.cause)
+                            Log.d("AuthState", "SessionStatus: RefreshFailure")
                             // Handle refresh failure - perhaps show an error message
                             navigateToRegister()
                         }

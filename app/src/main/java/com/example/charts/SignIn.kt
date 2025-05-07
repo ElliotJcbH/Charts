@@ -52,7 +52,7 @@ class SignIn : AppCompatActivity() {
                     submitButton.setText("Continue")
                     progressBar.visibility = View.GONE
 
-                    var intent = Intent(this@SignIn, Verification::class.java)
+                    var intent = Intent(this@SignIn, SessionManager::class.java)
                     intent.putExtra("email", email)
 
                     startActivity(intent)

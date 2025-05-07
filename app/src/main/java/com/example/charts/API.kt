@@ -9,6 +9,9 @@ import kotlinx.serialization.json.put
 import org.json.JSONObject
 import java.util.concurrent.Executors
 import com.example.charts.AlbumInfo
+import io.github.jan.supabase.postgrest.result.PostgrestResult
+import kotlinx.datetime.DateTimePeriod
+import kotlinx.datetime.LocalDateTime
 
 suspend fun fetch_top_10():  List<AlbumInfo> = coroutineScope {
     try {
@@ -174,6 +177,52 @@ suspend fun fetch_discography(artist_id: String): List<AlbumInfo> = coroutineSco
         return@coroutineScope discography
     } catch(e: Exception) {
         print("Error fetching discography: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun insert_review(
+    user_id: String,
+    album_id: String,
+    title: String,
+    content: String,
+    date: LocalDateTime,
+    score: Float,
+    favoriteLyrics: String,
+    favoriteSong: String,
+    worstLyrics: String,
+    worstSong: String
+    ): Result<PostgrestResult> {
+    try {
+        val review = buildJsonObject {
+            put("user_id", user_id)
+            put("album_id", album_id)
+            put("title", title)
+            put("content", content)
+            put("date", date.toString())
+            put("score", score)
+            put("favoriteLyrics", favoriteLyrics)
+            put("favoriteSong", favoriteSong)
+            put("worstLyrics", worstLyrics)
+            put("worstSong", worstSong)
+        }
+        val res = supabase.from("review").insert(review)
+        return Result.success(res)
+    } catch (e: Exception) {
+        print("Error creating user: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun delete_review(review_id: String) {
+    try {
+        supabase.from("review").delete {
+            filter {
+                eq("id", review_id)
+            }
+        }
+    } catch (e: Exception) {
+        print("Error deleting review: ${e.message}")
         throw(e)
     }
 }

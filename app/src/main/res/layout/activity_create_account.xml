@@ -67,12 +67,36 @@
             android:textColor="@color/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
+
+        <TextView
+            android:id="@+id/password_error"
+            android:text="Your passwords don't match!"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            />
+
+        <TextView
+            android:id="@+id/null_input_error"
+            android:text="Please fill out all the fields"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            />
+
 
         <TextView
             android:text="Username"

@@ -16,6 +16,16 @@
         android:theme="@style/Theme.Charts"
         tools:targetApi="31">
         <activity
+            android:name=".SessionManager"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".VerificationActivity"
             android:exported="false" />
         <activity
@@ -27,11 +37,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".CreateAccount" />

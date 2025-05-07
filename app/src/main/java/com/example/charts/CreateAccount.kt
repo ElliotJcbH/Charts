@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -38,37 +39,49 @@ class CreateAccount : AppCompatActivity() {
         val passwordInput1 = findViewById<AppCompatEditText>(R.id.password_input_1)
         val passwordInput2 = findViewById<AppCompatEditText>(R.id.password_input_2)
 
+        val passwordError: TextView = findViewById(R.id.password_error)
+        val nullError: TextView = findViewById(R.id.null_input_error)
+
         backButton.setOnClickListener {
             finish()
         }
 
         submitButton.setOnClickListener {
-            submitButton.isEnabled = false
-            submitButton.setText("")
-            progressBar.visibility = View.VISIBLE
-
             val username = usernameInput.text.toString()
             val email = emailInput.text.toString()
             val password1 = passwordInput1.text.toString()
             val password2 = passwordInput2.text.toString()
 
-            if(email.isBlank()) return@setOnClickListener
+            if(email.isBlank() || password1.isBlank()) {
+                nullError.visibility = View.VISIBLE
+                return@setOnClickListener
+            }
 
-            if(password1.isBlank()) return@setOnClickListener
+            if(password1 != password2) {
+                passwordError.visibility = View.VISIBLE
+                return@setOnClickListener
+            }
 
-            if(password1 != password2) return@setOnClickListener
+            submitButton.isEnabled = false
+            submitButton.setText("")
+            progressBar.visibility = View.VISIBLE
 
             lifecycleScope.launch() {
                 val res = create_user(email, password1)
 
                 if(res != null) {
+                    val user = create_user_record(username, email)
+
                     progressBar.visibility = View.GONE
+                    nullError.visibility = View.GONE
+                    passwordError.visibility = View.GONE
                     submitButton.setText("Continue")
                     submitButton.isEnabled = true
                     val intent = Intent(this@CreateAccount, VerificationActivity::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
                 }
+
             }
 
         }

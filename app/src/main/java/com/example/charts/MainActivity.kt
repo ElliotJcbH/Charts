@@ -55,12 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         setStatusBarColor(window, R.color.accent_gray)
 
-        val session = supabase.auth.currentSessionOrNull()
-        if(session == null) {
-            val intent = Intent(this, Register::class.java)
-            Log.d("No Session", "Session does not exist")
-            startActivity(intent)
-            finish()
+        val isNew = intent.getBooleanExtra("isNew", false)
+
+        if(isNew == true) {
+            WelcomeDialogFragment().show(supportFragmentManager, "WelcomeDialog")
         }
 
         if (savedInstanceState == null) {
@@ -150,6 +148,36 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+}
+
+class WelcomeDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Inflate the custom layout
+        val view = LayoutInflater.from(requireContext()).inflate(
+            R.layout.welcome_dialog,
+            null
+        )
+
+//        val negativeButton = view.findViewById<AppCompatButton>(R.id.negative)
+        val positiveButton = view.findViewById<AppCompatButton>(R.id.positive)
+
+        positiveButton.setOnClickListener {
+            dismiss()
+        }
+
+//        negativeButton.setOnClickListener {
+//            dismiss()
+//        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .create()
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        return dialog
+
+    }
 }
 
 class LogoutDialogFragment : DialogFragment() {

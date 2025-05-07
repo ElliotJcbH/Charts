@@ -44,6 +44,7 @@ class VerificationActivity : AppCompatActivity() {
                     submit.setText("Verify")
                     submit.isEnabled = true
                     val intent = Intent(this@VerificationActivity, MainActivity::class.java)
+                    intent.putExtra("isNew", true)
                     startActivity(intent)
                 }
             }
