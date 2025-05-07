@@ -37,9 +37,22 @@ suspend fun signin_user(myEmail: String, myPassword: String): Result<Unit> {
     }
 }
 
+suspend fun signout_user(): Result<Unit> {
+    try {
+        val res = supabase.auth.signOut()
+
+        return Result.success(res)
+    } catch (e: Exception) {
+        print("Error fetching top 10 weekly: ${e.message}")
+        throw (e)
+    }
+}
+
+
+
 suspend fun verify_user(myEmail: String, myToken: String): Result<Unit> {
     try {
-        val res = supabase.auth.verifyEmailOtp(type = OtpType.Email.EMAIL, email = "example@email.com", token = "token")
+        val res = supabase.auth.verifyEmailOtp(type = OtpType.Email.EMAIL, email = myEmail, token =  myToken)
 
         return Result.success(res)
 

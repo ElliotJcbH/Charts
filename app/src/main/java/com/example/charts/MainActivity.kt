@@ -25,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import io.github.jan.supabase.auth.auth
@@ -32,6 +33,7 @@ import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -165,7 +167,13 @@ class LogoutDialogFragment : DialogFragment() {
             var intent = Intent(requireActivity(), Register::class.java)
             startActivity(intent)
 
-            requireActivity().finish()
+            lifecycleScope.launch {
+                val res = signout_user()
+
+                if(res != null) {
+                    requireActivity().finish()
+                }
+            }
         }
 
         negativeButton.setOnClickListener {

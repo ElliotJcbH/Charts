@@ -186,16 +186,33 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit"
-            android:text="Continue"
-            android:textAllCaps="false"
-            android:fontFamily="@font/satoshi_bold"
-            android:textColor="@color/black"
-            android:background="@drawable/register_page_button2"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit"
+                android:text="Continue"
+                android:textAllCaps="false"
+                android:fontFamily="@font/satoshi_bold"
+                android:textColor="@color/black"
+                android:background="@drawable/register_page_button2"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                />
+
+            <ProgressBar
+                android:id="@+id/buttonProgressBar" android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@android:color/black"
+                android:visibility="gone"
             />
+
+        </FrameLayout>
+
+
 
     </LinearLayout>
 

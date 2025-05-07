@@ -2,13 +2,17 @@ package com.example.charts
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class SignIn : AppCompatActivity() {
 
@@ -30,16 +34,32 @@ class SignIn : AppCompatActivity() {
         }
 
         val submitButton = findViewById<AppCompatButton>(R.id.submit)
+        val progressBar: ProgressBar = findViewById(R.id.buttonProgressBar)
 
         submitButton.setOnClickListener {
+            submitButton.isEnabled = false
+            submitButton.setText("")
+            progressBar.visibility = View.VISIBLE
 
             val email = findViewById<AppCompatEditText>(R.id.email).text.toString()
             val password = findViewById<AppCompatEditText>(R.id.password).text.toString()
 
-            var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("email", email)
+            lifecycleScope.launch {
+                val res = signin_user(email, password)
 
-            startActivity(intent)
+                if(res != null) {
+                    submitButton.isEnabled = true
+                    submitButton.setText("Continue")
+                    progressBar.visibility = View.GONE
+
+                    var intent = Intent(this@SignIn, MainActivity::class.java)
+                    intent.putExtra("email", email)
+
+                    startActivity(intent)
+                }
+            }
+
+
         }
 
     }

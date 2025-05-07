@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -30,6 +32,7 @@ class CreateAccount : AppCompatActivity() {
 
         val backButton = findViewById<ImageButton>(R.id.backButton)
         val submitButton = findViewById<AppCompatButton>(R.id.submit)
+        val progressBar = findViewById<ProgressBar>(R.id.buttonProgressBar)
         val usernameInput = findViewById<AppCompatEditText>(R.id.username_input)
         val emailInput = findViewById<AppCompatEditText>(R.id.email_input)
         val passwordInput1 = findViewById<AppCompatEditText>(R.id.password_input_1)
@@ -40,6 +43,10 @@ class CreateAccount : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
+            submitButton.isEnabled = false
+            submitButton.setText("")
+            progressBar.visibility = View.VISIBLE
+
             val username = usernameInput.text.toString()
             val email = emailInput.text.toString()
             val password1 = passwordInput1.text.toString()
@@ -55,9 +62,11 @@ class CreateAccount : AppCompatActivity() {
                 val res = create_user(email, password1)
 
                 if(res != null) {
+                    progressBar.visibility = View.GONE
+                    submitButton.setText("Continue")
+                    submitButton.isEnabled = true
                     val intent = Intent(this@CreateAccount, VerificationActivity::class.java)
                     intent.putExtra("email", email)
-
                     startActivity(intent)
                 }
             }
