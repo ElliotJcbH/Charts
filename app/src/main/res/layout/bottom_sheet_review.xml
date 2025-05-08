@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/accent_gray"
+    >
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/standard_bottom_sheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="30dp">
+
+                <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                    android:id="@+id/drag_handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Review"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:textColor="@color/text2"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/post_button"
+                            android:text="Post"
+                            android:textColor="@color/black"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:background="@drawable/register_page_button2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:maxHeight="16dp"
+                            />
+
+                        <ProgressBar
+                            android:id="@+id/buttonProgressBar"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:indeterminateTint="@android:color/black"
+                            android:visibility="gone"
+                            />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/divider_color"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    />-->
+
+                <TextView
+                    android:id="@+id/album_name"
+                    android:text="Album Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:textColor="@color/text"
+                    android:textSize="16dp"
+                    android:layout_marginTop="32dp"
+                    />
+
+<!--                <TextView-->
+<!--                    android:text="Score"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:textColor="@color/text2"-->
+<!--                    android:fontFamily="@font/satoshi_regular"-->
+<!--                    />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:layout_marginTop="12dp"
+                    >
+
+                    <RatingBar
+                        android:id="@+id/scoreRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.5"
+                        android:rating="0.0"
+                        android:progressTint="@color/primary"
+                        />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/title_input"
+                    android:hint="Title"
+                    android:textColorHint="@color/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:textColor="@color/text"
+                    android:textSize="20dp"
+                    android:paddingBottom="8dp"
+                    android:gravity="top"
+                    android:background="@color/transparent"
+                    />
+
+                <Space
+                    android:layout_height="10dp"
+                    android:layout_width="match_parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/review_input"
+                    android:hint="Write a review..."
+                    android:textColorHint="@color/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/text"
+                    android:textSize="14dp"
+                    android:background="@drawable/text_input"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:gravity="top"
+                    />
+
+                <Space
+                    android:layout_height="10dp"
+                    android:layout_width="match_parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/favorite_lyric_input"
+                    android:hint="Did you have a favorite lyric?"
+                    android:textColorHint="@color/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/text"
+                    android:textSize="14dp"
+                    android:background="@drawable/text_input"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:gravity="top"
+                    />
+
+                <Space
+                    android:layout_height="10dp"
+                    android:layout_width="match_parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/worst_lyric_input"
+                    android:hint="What was the worst lyric?"
+                    android:textColorHint="@color/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/text"
+                    android:textSize="14dp"
+                    android:background="@drawable/text_input"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:gravity="top"
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

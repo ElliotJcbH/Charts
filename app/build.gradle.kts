@@ -41,6 +41,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+//    allprojects {
+//        repositories {
+//            google()
+//            mavenCentral()
+//        }
+//    }
 }
 
 dependencies {
@@ -63,5 +69,6 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:realtime-kt")
     implementation("io.ktor:ktor-client-android:3.0.0-rc-1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+    implementation("com.google.android.material:material:1.11.0")
 
 }

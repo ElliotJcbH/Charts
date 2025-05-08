@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
@@ -63,6 +64,12 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             loadFragment(Home())
+        }
+
+        val notifications: AppCompatImageButton = findViewById(R.id.notifications)
+        val reviewBottomSheet = DialogReviewBottomSheet()
+        notifications.setOnClickListener{
+            reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
         }
 
         drawerLayout = findViewById(R.id.drawer_layout)
