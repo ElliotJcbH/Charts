@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -42,9 +43,8 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
             val bottomSheetDialog = dialogInterface as BottomSheetDialog
 
             // Get the internal FrameLayout of the bottom sheet dialog
-            val bottomSheet = bottomSheetDialog.findViewById<View>(
-                com.google.android.material.R.id.design_bottom_sheet
-            )
+            val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(android.R.id.content)?.getChildAt(0)
+
 
             val postButton: AppCompatButton? = bottomSheetDialog.findViewById(R.id.post_button)
             val titleInput: AppCompatEditText? = bottomSheetDialog.findViewById(R.id.title_input)
@@ -70,8 +70,8 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
                 lifecycleScope.launch {
                     var res = insert_review(
-                        "",
-                        "",
+                        userId.toString(),
+                        albumId.toString(),
                         title,
                         review,
                         java.time.LocalDateTime.now(),

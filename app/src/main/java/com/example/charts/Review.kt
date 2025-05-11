@@ -4,10 +4,11 @@ import kotlinx.datetime.DateTimePeriod
 import kotlinx.serialization.Serializable
 import org.w3c.dom.Comment
 
-@Serializable
+@Serializable //hhahaha all this shit is nullable idk what the fuck im doing
 data class Review (
     val id: String?,
     val user_id: String?,
+    val user_name: String?,
     val album_id: String?,
     val title: String?,
     val content: String?,
