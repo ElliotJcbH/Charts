@@ -44,7 +44,7 @@ data class AlbumInfo(
     val songs: List<String>?,
     val link: String?,
     val genre_names: List<String>?,
-    val description: List<String>?,
+    val description: String?,
 //    @Serializable(with = PostgresDateSerializer::class)
     val release_date: String?,
     val explicit: Boolean?,
@@ -52,7 +52,7 @@ data class AlbumInfo(
     val country: String?,
     val copyright: String?,
     val awards: List<String>?,
-    val title: String?,
+    val title: String? = "",
     val album_length: Int?,
     val album_cover: String?,
     val review_count: Int?,

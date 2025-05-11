@@ -1,5 +1,6 @@
 package com.example.charts
 
+import android.util.Log
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.coroutineScope
@@ -16,7 +17,7 @@ import kotlinx.datetime.LocalDateTime
 suspend fun fetch_top_10():  List<AlbumInfo> = coroutineScope {
     try {
         val album_info = supabase.from("album_top_10_weekly").select().decodeList<AlbumInfo>()
-        print(album_info)
+        Log.d("Album Info", album_info.toString())
         return@coroutineScope album_info
     } catch(e: Exception){
         print("Error fetching top 10 weekly: ${e.message}")
@@ -179,6 +180,24 @@ suspend fun fetch_discography(artist_id: String): List<AlbumInfo> = coroutineSco
         print("Error fetching discography: ${e.message}")
         throw(e)
     }
+}
+
+suspend fun get_my_reviews(
+
+): List<Review> = coroutineScope {
+
+    try {
+        val res = supabase.postgrest.rpc(
+            "get_my_reviews"
+        )
+        val myReviews = res.decodeList<Review>()
+
+        return@coroutineScope myReviews
+    } catch(e: Exception) {
+        print("Error fetching my reviews: ${e.message}")
+        throw(e)
+    }
+
 }
 
 suspend fun insert_review(

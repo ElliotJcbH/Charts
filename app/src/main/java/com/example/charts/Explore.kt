@@ -24,12 +24,12 @@ class Explore : Fragment() {
             insets
         }
 
-        view.findViewById<ImageView>(R.id.btnPlay).setOnClickListener { replaceFragment(IgorFragment()) }
-        view.findViewById<ImageView>(R.id.btnPlay2).setOnClickListener { replaceFragment(BullyFragment()) }
-        view.findViewById<ImageView>(R.id.btnPlay3).setOnClickListener { replaceFragment(NectarFragment()) }
-        view.findViewById<ImageView>(R.id.btnPlay4).setOnClickListener { replaceFragment(GnxFragment()) }
-        view.findViewById<ImageView>(R.id.btnPlay5).setOnClickListener { replaceFragment(LflFragment()) }
-        view.findViewById<ImageView>(R.id.btnPlay6).setOnClickListener { replaceFragment(StarboyFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay).setOnClickListener { replaceFragment(IgorFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay2).setOnClickListener { replaceFragment(BullyFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay3).setOnClickListener { replaceFragment(NectarFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay4).setOnClickListener { replaceFragment(GnxFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay5).setOnClickListener { replaceFragment(LflFragment()) }
+//        view.findViewById<ImageView>(R.id.btnPlay6).setOnClickListener { replaceFragment(StarboyFragment()) }
 
         return view
     }

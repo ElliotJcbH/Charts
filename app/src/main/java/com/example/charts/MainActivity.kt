@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Friends -> {
-                    loadFragment(FriendsFragment()) // Create this fragment
+//                    loadFragment(FriendsFragment()) // Create this fragment
                     true
                 }
                 R.id.Connections -> {

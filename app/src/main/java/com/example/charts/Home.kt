@@ -77,7 +77,7 @@ class Home : Fragment() {
                 withContext(Dispatchers.Main) {
                     // Display an error message to the user
 //                    statusTextView.text = "Error fetching albums: ${e.message}"
-                    Log.e("HomeFragment", "Error fetching top 10 albums", e)
+                    Log.e("HomeFragment", "Error fetching artist", e)
                     throw(e)
                     // You might also show a Toast or a Dialog
                 }
