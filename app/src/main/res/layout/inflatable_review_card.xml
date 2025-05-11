@@ -11,7 +11,7 @@
         app:layout_constraintTop_toTopOf="parent"
         >
         <TextView
-            android:id="@+id/reviewer_name"
+            android:id="@+id/album_name"
             android:text="Reviewer Name"
             android:textColor="@color/text"
             android:textSize="14sp"
@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/review_date"
             android:textColor="@color/text2"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:fontFamily="@font/satoshi_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/card_top"
+        android:layout_marginTop="5dp"
         >
         <RatingBar
             android:id="@+id/review_score"
@@ -52,6 +53,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             style="?android:attr/ratingBarStyleSmall"
             />
+
+        <TextView
+            android:id="@+id/reviewer_name"
+            android:text="Reviewer Name"
+            android:textColor="@color/text2"
+            android:textSize="14sp"
+            android:fontFamily="@font/satoshi_medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingLeft="3dp"
+            app:layout_constraintStart_toEndOf="@id/review_score"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rating_container"
+        android:layout_marginTop="8dp"
         >
         <TextView
             android:id="@+id/review_title"
@@ -78,6 +94,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_title"
+            android:layout_marginTop="5dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,16 +103,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/content_container"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
         >
 
         <TextView
+            android:id="@+id/lyric_label_1"
             android:text="Favorite Lyric"
             android:textSize="12sp"
             android:textColor="@color/text2"
             android:fontFamily="@font/satoshi_regular"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
 
         <TextView
             android:id="@+id/favorite_lyric"
@@ -104,15 +124,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshi_regular"
+            android:layout_marginTop="3dp"
             />
 
         <TextView
+            android:id="@+id/lyric_label_2"
             android:text="Worst Lyric"
             android:textSize="12sp"
             android:textColor="@color/text2"
             android:fontFamily="@font/satoshi_regular"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            />
 
         <TextView
             android:id="@+id/worst_lyric"
@@ -121,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshi_regular"
+            android:layout_marginTop="3dp"
             />
 
     </LinearLayout>

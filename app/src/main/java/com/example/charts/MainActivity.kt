@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         setStatusBarColor(window, R.color.accent_gray)
 
+        Log.d("Session", supabase.auth.currentSessionOrNull().toString())
+
         val isNew = intent.getBooleanExtra("isNew", false)
 
         if(isNew == true) {

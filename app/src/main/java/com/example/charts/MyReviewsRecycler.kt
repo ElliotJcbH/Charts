@@ -1,5 +1,6 @@
 package com.example.charts
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.datetime.DateTimePeriod
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<MyReviewsRecycler.ModelViewHolder>() {
 
@@ -32,25 +35,35 @@ class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<M
         val review = data[position]
 
         // Bind the data to the views
+        Log.d("Review", review.toString())
         holder.bind(review)
     }
 
     inner class ModelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // References to views in the layout
+        private val albumName: TextView = itemView.findViewById(R.id.album_name)
         private val reviewerName: TextView = itemView.findViewById(R.id.reviewer_name)
         private val reviewDate: TextView = itemView.findViewById(R.id.review_date)
         private val reviewScore: RatingBar = itemView.findViewById(R.id.review_score)
         private val reviewTitle: TextView = itemView.findViewById(R.id.review_title)
         private val reviewContent: TextView = itemView.findViewById(R.id.review_content)
         private val favoriteLyric: TextView = itemView.findViewById(R.id.favorite_lyric)
+        private val lyricLabel1: TextView = itemView.findViewById(R.id.lyric_label_1)
         private val worstLyric: TextView = itemView.findViewById(R.id.worst_lyric)
+        private val lyricLabel2: TextView = itemView.findViewById(R.id.lyric_label_2)
 
         fun bind(review: Review) {
             // Set reviewer name
-            reviewerName.text = review.user_name ?: "Unknown User"
+//            itemView.setOnLongClickListener {
+//
+//            }
+
+            albumName.text = review.album_name
+            reviewerName.text = "by ${review.username}"
 
             // Format and set the date
-            reviewDate.text = formatDate(review.date)
+            val parsedDateTime = OffsetDateTime.parse(review.date)
+            reviewDate.text = parsedDateTime.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"))
 
             // Set rating score
             reviewScore.rating = review.score ?: 0f
@@ -60,17 +73,16 @@ class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<M
             reviewContent.text = review.content ?: ""
 
             // Set favorite and worst lyrics
-            favoriteLyric.text = review.favorite_lyrics ?: "N/A"
-            worstLyric.text = review.worst_lyrics ?: "N/A"
-        }
-
-        // Helper function to format date
-        private fun formatDate(date: DateTimePeriod?): String {
-            return if (date != null) {
-                // Format the date as needed - you'll need to implement this based on your DateTimePeriod class
-                "${date.months}/${date.days}/${date.years}"
+            if(review.favorite_lyrics != "") {
+                favoriteLyric.text = review.favorite_lyrics
             } else {
-                "Unknown Date"
+                lyricLabel1.visibility = View.GONE
+            }
+
+            if(review.worst_lyrics != "") {
+                worstLyric.text = review.worst_lyrics
+            } else {
+                lyricLabel2.visibility = View.GONE
             }
         }
     }

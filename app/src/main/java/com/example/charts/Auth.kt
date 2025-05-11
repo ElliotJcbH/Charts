@@ -13,16 +13,23 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 
-suspend fun create_user(myEmail: String, myPassword: String): Result<UserInfo?> {
+suspend fun create_user(myEmail: String, myPassword: String): Result<String> {
     try {
-        val userSession = supabase.auth.signUpWith(Email) {
+        val result = supabase.auth.signUpWith(Email) {
             email = myEmail
             password = myPassword
         }
-        return Result.success(userSession)
+
+        // Extract the user ID from the response
+        if (result.isSuccess) {
+            userId = result.getOrNull()?.user?.id
+        } else {
+            // Handle the error
+        }
+
     } catch (e: Exception) {
-        print("Error fetching top 10 weekly: ${e.message}")
-        throw (e)
+        print("Error creating user: ${e.message}")
+        return Result.failure(e)
     }
 }
 
