@@ -1,11 +1,15 @@
 package com.example.charts
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +32,29 @@ class Home : Fragment() {
             insets
         }
 
-        return view    }
+        val searchBar: EditText = view.findViewById(R.id.searchBar)
+
+        searchBar.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH ||
+                (event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)
+            ) {
+                val query = searchBar.text.toString()
+
+                if(query != null) {
+                    if (query.isNotBlank()) {
+                        val intent = Intent(requireContext(), SearchActivity::class.java)
+                        intent.putExtra("query", query)
+                        startActivity(intent)
+                    }
+                }
+
+                true
+            } else {
+                false
+            }
+        }
+        return view
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/profile_name"
-            android:text="rokketo"
+            android:text=""
             android:textSize="20sp"
             android:textColor="@color/text"
             android:textAlignment="viewStart"
@@ -44,8 +44,8 @@
             />
 
         <TextView
-            android:id="@+id/email"
-            android:text="elliot.jacob09@gmail.com"
+            android:id="@+id/profile_email"
+            android:text=""
             android:textSize="14sp"
             android:textColor="@color/text2"
             android:textAlignment="viewStart"

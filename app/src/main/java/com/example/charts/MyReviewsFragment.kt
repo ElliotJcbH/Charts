@@ -2,29 +2,26 @@ package com.example.charts
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyReviewsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MyReviewsFragment : Fragment() {
+class MyReviewsFragment : Fragment(), MyReviewsRecycler.OnReviewActionListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -52,11 +49,18 @@ class MyReviewsFragment : Fragment() {
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.reviews_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         emptyView = view.findViewById(R.id.empty_view)
 
+        val dividerItemDecoration = DividerItemDecoration(
+            recyclerView.context,
+            (recyclerView.layoutManager as LinearLayoutManager).orientation
+        )
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+
         // Initialize the adapter with empty list (will be populated later)
-        reviewsAdapter = MyReviewsRecycler(reviewsList)
+        reviewsAdapter = MyReviewsRecycler(reviewsList, this)
         recyclerView.adapter = reviewsAdapter
 
         return view
@@ -82,6 +86,7 @@ class MyReviewsFragment : Fragment() {
                         // Notify the adapter that data has changed
                         reviewsAdapter.notifyDataSetChanged()
 
+
                         // Hide loading indicator if you have one
                         // loadingProgressBar.visibility = View.GONE
                     } else {
@@ -102,6 +107,13 @@ class MyReviewsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onReviewLongPress(reviewId: String) {
+        Log.d("Action", "Long Press Triggered")
+        val reviewBottomSheet = DialogReviewActions.newInstance(reviewId)
+        // Show the bottom sheet using the Fragment's childFragmentManager
+        reviewBottomSheet.show(childFragmentManager, DialogReviewActions.TAG)
     }
 
     companion object {

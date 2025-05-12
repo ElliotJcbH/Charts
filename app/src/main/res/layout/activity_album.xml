@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AlbumActivity">
+    tools:context=".AlbumActivity"
+    android:background="@color/accent_gray"
+    >
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

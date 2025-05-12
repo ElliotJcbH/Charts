@@ -25,6 +25,7 @@ class VerificationActivity : AppCompatActivity() {
         }
 
         val email = intent.getStringExtra("email").toString()
+        val username = intent.getStringExtra("username").toString()
 
         val verificationInput: AppCompatEditText = findViewById(R.id.verification_input)
         val submit: AppCompatButton = findViewById(R.id.submit)
@@ -39,7 +40,9 @@ class VerificationActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val res = verify_user(email, verification)
 
-                if(res != null) {
+                if(res.isSuccess) {
+                    val user = create_user_record(username, email)
+
                     progressBar.visibility = View.GONE
                     submit.setText("Verify")
                     submit.isEnabled = true

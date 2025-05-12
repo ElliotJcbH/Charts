@@ -14,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDateTime
 
 class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
@@ -108,8 +107,8 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
         private const val ARG_ALBUM_ID = "album_id"
 
         // Factory method to create a new instance with arguments
-        fun newInstance(userId: String, albumId: String): DialogReviewBottomSheet {
-            val fragment = DialogReviewBottomSheet()
+        fun newInstance(userId: String, albumId: String): DialogReviewActions {
+            val fragment = DialogReviewActions()
             val args = Bundle().apply {
                 putString(ARG_USER_ID, userId)
                 putString(ARG_ALBUM_ID, albumId)

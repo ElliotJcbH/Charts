@@ -13,13 +13,23 @@ import kotlinx.datetime.DateTimePeriod
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<MyReviewsRecycler.ModelViewHolder>() {
+class MyReviewsRecycler(
+    private val data: List<Review>,
+    private val reviewActionListener: OnReviewActionListener // Add this listener parameter
+) : RecyclerView.Adapter<MyReviewsRecycler.ModelViewHolder>() {
+
+    // Define the callback interface
+    interface OnReviewActionListener {
+        fun onReviewLongPress(reviewId: String)
+        // Add other actions if needed, e.g., fun onReviewClick(reviewId: String)
+    }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ModelViewHolder {
-        // Inflate the review card layout
+        // Inflate the review card layoutå
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.inflatable_review_card, parent, false)
         return ModelViewHolder(view)
@@ -53,10 +63,6 @@ class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<M
         private val lyricLabel2: TextView = itemView.findViewById(R.id.lyric_label_2)
 
         fun bind(review: Review) {
-            // Set reviewer name
-//            itemView.setOnLongClickListener {
-//
-//            }
 
             albumName.text = review.album_name
             reviewerName.text = "by ${review.username}"
@@ -74,13 +80,13 @@ class MyReviewsRecycler(private val data: List<Review>) : RecyclerView.Adapter<M
 
             // Set favorite and worst lyrics
             if(review.favorite_lyrics != "") {
-                favoriteLyric.text = review.favorite_lyrics
+                favoriteLyric.text = "\"${review.favorite_lyrics}\""
             } else {
                 lyricLabel1.visibility = View.GONE
             }
 
             if(review.worst_lyrics != "") {
-                worstLyric.text = review.worst_lyrics
+                worstLyric.text = "\"${review.worst_lyrics}\""
             } else {
                 lyricLabel2.visibility = View.GONE
             }

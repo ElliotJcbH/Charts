@@ -69,8 +69,7 @@ class CreateAccount : AppCompatActivity() {
             lifecycleScope.launch() {
                 val res = create_user(email, password1)
 
-                if(res != null) {
-                    val user = create_user_record(username, email)
+                if(res.isSuccess) {
 
                     progressBar.visibility = View.GONE
                     nullError.visibility = View.GONE
@@ -79,6 +78,7 @@ class CreateAccount : AppCompatActivity() {
                     submitButton.isEnabled = true
                     val intent = Intent(this@CreateAccount, VerificationActivity::class.java)
                     intent.putExtra("email", email)
+                    intent.putExtra("username", username)
                     startActivity(intent)
                 }
 

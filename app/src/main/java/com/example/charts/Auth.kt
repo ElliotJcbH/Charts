@@ -7,29 +7,23 @@ import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.user.UserInfo
 import io.github.jan.supabase.auth.user.UserSession
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.result.PostgrestResult
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 
-suspend fun create_user(myEmail: String, myPassword: String): Result<String> {
+suspend fun create_user(myEmail: String, myPassword: String): Result<UserInfo?> {
     try {
-        val result = supabase.auth.signUpWith(Email) {
+        val userSession = supabase.auth.signUpWith(Email) {
             email = myEmail
             password = myPassword
         }
-
-        // Extract the user ID from the response
-        if (result.isSuccess) {
-            userId = result.getOrNull()?.user?.id
-        } else {
-            // Handle the error
-        }
-
+        return Result.success(userSession)
     } catch (e: Exception) {
-        print("Error creating user: ${e.message}")
-        return Result.failure(e)
+        print("Error fetching top 10 weekly: ${e.message}")
+        throw (e)
     }
 }
 
@@ -82,6 +76,18 @@ suspend fun create_user_record(myUsername: String, myEmail: String): Result<Post
         return Result.success(res)
     } catch (e: Exception) {
         print("Error creating user: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun get_my_record(): User = coroutineScope {
+    try {
+        val res = supabase.postgrest.rpc("get_my_record")
+        val user = res.decodeSingle<User>()
+
+        return@coroutineScope user
+    } catch(e: Exception) {
+        Log.d("Auth", e.message.toString())
         throw(e)
     }
 }

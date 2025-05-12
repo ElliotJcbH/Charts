@@ -1,19 +1,16 @@
 package com.example.charts
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.Window
 import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,10 +27,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.postgrest.from
-import io.github.jan.supabase.postgrest.postgrest
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -54,9 +47,31 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        setStatusBarColor(window, R.color.accent_gray)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        drawer = findViewById(R.id.profile_drawer)
 
+        setStatusBarColor(window, R.color.accent_gray)
         Log.d("Session", supabase.auth.currentSessionOrNull().toString())
+        lifecycleScope.launch {
+            val user = get_my_record()
+
+            MyUserObject.myUserId = user.id.toString()
+            MyUserObject.myUsername = user.username.toString()
+            MyUserObject.myEmail = user.email.toString()
+
+            val drawerHeader = drawer.findViewById<ConstraintLayout>(R.id.drawer_header)
+            val profileName: TextView = drawerHeader.findViewById(R.id.profile_name)
+            val profileEmail: TextView = drawerHeader.findViewById(R.id.profile_email)
+            val profileImage: ImageView = drawerHeader.findViewById(R.id.profile_picture)
+
+            profileName.text = MyUserObject.myUsername
+            profileEmail.text = MyUserObject.myEmail
+            profileImage.setOnClickListener {
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
 
         val isNew = intent.getBooleanExtra("isNew", false)
 
@@ -74,8 +89,6 @@ class MainActivity : AppCompatActivity() {
             reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        drawer = findViewById(R.id.profile_drawer)
         drawer.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.myReviews -> {
@@ -97,8 +110,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        val drawerHeader = drawer.findViewById<ConstraintLayout>(R.id.drawer_header)
 
         bottomNav = findViewById(R.id.bottom_nav)
         bottomNav.setOnItemSelectedListener { item ->

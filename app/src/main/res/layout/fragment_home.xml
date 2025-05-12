@@ -68,7 +68,10 @@
                 android:drawableEnd="@android:drawable/ic_menu_search"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                />
 
             <!-- Spacer between Search Bar & Popular Title -->
             <View

@@ -145,7 +145,7 @@ suspend fun fetch_album(album_id: String): AlbumInfo = coroutineScope {
 suspend fun find_albums(album_name: String): List<AlbumInfo> = coroutineScope {
     try {
         val rpcParams = buildJsonObject {
-            put("input_album_name", album_name)
+            put("insert_album_name", album_name)
         }
 
         val res = supabase.postgrest.rpc(
@@ -154,6 +154,7 @@ suspend fun find_albums(album_name: String): List<AlbumInfo> = coroutineScope {
         )
 
         val albums = res.decodeList<AlbumInfo>()
+        Log.d("API", "Albums: ${albums}")
         print(albums)
         return@coroutineScope albums
     } catch (e: Exception) {

@@ -48,12 +48,14 @@ class SessionManager : AppCompatActivity() {
 
     private fun navigateToRegister() {
         val intent = Intent(this, Register::class.java) // Replace Register::class.java with your Register Activity
+
         startActivity(intent)
         finish() // Finish the current activity so the user can't go back
     }
 
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java) // Replace MainActivity::class.java with your Main Activity
+
         startActivity(intent)
         finish() // Finish the current activity so the user can't go back
     }
