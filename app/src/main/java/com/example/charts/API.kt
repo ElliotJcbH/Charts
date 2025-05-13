@@ -117,7 +117,7 @@ suspend fun fetch_reviews(): List<Review> = coroutineScope {
 suspend fun fetch_reviews_for_album(album_id: String): List<Review> = coroutineScope {
     try {
         val rpcParams: JsonObject = buildJsonObject {
-            put("input_album_id", album_id)
+            put("insert_album_id", album_id)
         }
         val res = supabase.postgrest.rpc(
             "get_reviews_with_album_id",
@@ -243,6 +243,27 @@ suspend fun delete_review(review_id: String) {
         }
     } catch (e: Exception) {
         print("Error deleting review: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun does_review_exist(userId: String, albumId: String) = coroutineScope {
+    try {
+        val rpcParams = buildJsonObject {
+            put("input_album_id", albumId)
+        }
+
+        val res = supabase.postgrest.rpc(
+            "does_review_exist",
+            parameters = rpcParams
+        )
+
+        if(res == null) return@coroutineScope null
+
+        val review = res.decodeSingle<Review>()
+        return@coroutineScope review
+    } catch (e: Exception) {
+        Log.e("error checking if review exists", e.toString())
         throw(e)
     }
 }
