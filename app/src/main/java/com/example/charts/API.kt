@@ -221,15 +221,15 @@ suspend fun insert_review(
             put("content", content)
             put("date", date.toString())
             put("score", score)
-            put("favoriteLyrics", favoriteLyrics)
-            put("favoriteSong", favoriteSong)
-            put("worstLyrics", worstLyrics)
-            put("worstSong", worstSong)
+            put("favorite_lyrics", favoriteLyrics)
+            put("favorite_song", favoriteSong)
+            put("worst_lyrics", worstLyrics)
+            put("worst_song", worstSong)
         }
         val res = supabase.from("review").insert(review)
         return Result.success(res)
     } catch (e: Exception) {
-        print("Error creating user: ${e.message}")
+        print("Error inserting review: ${e.message}")
         throw(e)
     }
 }

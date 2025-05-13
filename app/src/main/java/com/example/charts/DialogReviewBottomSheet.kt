@@ -6,26 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.RatingBar
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
-    private var userId: String? = null
-    private var albumId: String? = null
+    private var userId = MyUserObject.myUserId
+    private var albumJSON: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Retrieve the arguments from the Bundle
         arguments?.let {
-            userId = it.getString(ARG_USER_ID)
-            albumId = it.getString(ARG_ALBUM_ID)
+            albumJSON = it.getString(ARG_ALBUM_INFO) ?: ""
         }
     }
 
@@ -37,13 +40,19 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
+        val albumInfo =  albumJSON.let {
+                Json.decodeFromString(AlbumInfo.serializer(), it)
+        }
 
         dialog.setOnShowListener { dialogInterface ->
             val bottomSheetDialog = dialogInterface as BottomSheetDialog
 
             // Get the internal FrameLayout of the bottom sheet dialog
-            val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(android.R.id.content)?.getChildAt(0)
+            val bottomSheet = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.accent_gray))
 
+            val albumName: TextView? = bottomSheetDialog.findViewById(R.id.album_name)
+            albumName?.text = albumInfo.title ?: ""
 
             val postButton: AppCompatButton? = bottomSheetDialog.findViewById(R.id.post_button)
             val titleInput: AppCompatEditText? = bottomSheetDialog.findViewById(R.id.title_input)
@@ -52,6 +61,7 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
             val worstLyricInput: AppCompatEditText? = bottomSheetDialog.findViewById(R.id.worst_lyric_input)
             var score: Float = 0.0f
             val scoreInput: RatingBar? = bottomSheetDialog.findViewById(R.id.scoreRatingBar)
+            val progressBar: ProgressBar? = bottomSheetDialog.findViewById(R.id.buttonProgressBar)
 
             scoreInput?.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 score = rating
@@ -68,9 +78,12 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
                 }
 
                 lifecycleScope.launch {
+                    postButton?.text = ""
+                    progressBar?.visibility = View.VISIBLE
+                    postButton.isEnabled = false
                     var res = insert_review(
                         userId.toString(),
-                        albumId.toString(),
+                        albumInfo.id ?: "",
                         title,
                         review,
                         java.time.LocalDateTime.now(),
@@ -80,6 +93,12 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
                         worstLyric,
                         ""
                     )
+                    if(res.isSuccess) {
+                        progressBar?.visibility = View.VISIBLE
+                        postButton?.text = "Post"
+                        postButton.isEnabled = true
+                        dismiss()
+                    }
                 }
             }
 
@@ -103,15 +122,13 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "DialogReviewBottomSheet"
-        private const val ARG_USER_ID = "user_id"
-        private const val ARG_ALBUM_ID = "album_id"
+        private const val ARG_ALBUM_INFO = ""
 
         // Factory method to create a new instance with arguments
-        fun newInstance(userId: String, albumId: String): DialogReviewActions {
-            val fragment = DialogReviewActions()
+        fun newInstance(albumJson: String): DialogReviewBottomSheet {
+            val fragment = DialogReviewBottomSheet()
             val args = Bundle().apply {
-                putString(ARG_USER_ID, userId)
-                putString(ARG_ALBUM_ID, albumId)
+                putString(ARG_ALBUM_INFO, albumJson)
             }
             fragment.arguments = args
             return fragment

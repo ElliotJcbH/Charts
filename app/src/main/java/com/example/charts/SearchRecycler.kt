@@ -15,6 +15,8 @@ import kotlinx.datetime.DateTimePeriod
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToLong
+import coil.load
+import kotlinx.serialization.json.Json
 
 class SearchRecycler(private val data: List<AlbumInfo>) : RecyclerView.Adapter<SearchRecycler.ModelViewHolder>() {
 
@@ -55,8 +57,10 @@ class SearchRecycler(private val data: List<AlbumInfo>) : RecyclerView.Adapter<S
         fun bind(album: AlbumInfo) {
 
             card.setOnClickListener {
+                val albumJSON = Json.encodeToString(AlbumInfo.serializer(), album)
                 val intent = Intent(itemView.context, AlbumActivity::class.java)
-                intent.putExtra("albumId", album.id.toString())
+//                intent.putExtra("albumId", album.id.toString())
+                intent.putExtra("albumInfo", albumJSON)
 
                 itemView.context.startActivity(intent)
             }
@@ -64,6 +68,13 @@ class SearchRecycler(private val data: List<AlbumInfo>) : RecyclerView.Adapter<S
             albumName.text = album.title
             artistName.text = album.artist_name
 //            albumCover.text = album.album_cover
+            if(album.album_cover != "") {
+                albumCover.load(album.album_cover)
+            }
+//            albumCover.load("https://plus.unsplash.com/premium_photo-1694540892449-5c3170caf81c?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") {
+//
+//            }
+
             score.text = String.format("%.1f", album.average_score ?: 0.0)
             reviewCount.text = "${album.review_count} reviews"
 

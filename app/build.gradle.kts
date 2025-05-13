@@ -71,4 +71,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     implementation("com.google.android.material:material:1.11.0")
 
+    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("io.coil-kt:coil:2.7.0") // Replace 2.7.0 with the latest version
+
 }
