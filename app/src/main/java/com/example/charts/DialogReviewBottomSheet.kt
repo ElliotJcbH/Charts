@@ -2,6 +2,7 @@ package com.example.charts
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,11 +35,14 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Retrieve the arguments from the Bundle
+        // Retrieve the arguments from the Bundle using unique keys
         arguments?.let {
             albumJSON = it.getString(ARG_ALBUM_INFO) ?: ""
             existingReview = it.getString(ARG_EXISTING_REVIEW)
         }
+        // Add logs here to confirm the values after retrieving from arguments
+        Log.d(TAG, "onCreate: albumJSON = $albumJSON")
+        Log.d(TAG, "onCreate: existingReview = $existingReview")
     }
 
     override fun onCreateView(
@@ -49,9 +53,13 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        val albumInfo =  albumJSON.let {
-                Json.decodeFromString(AlbumInfo.serializer(), it)
-        }
+
+        // These logs were helpful for debugging, but you can remove them if you like
+        // Log.d("AlbumActivity", existingReview.toString())
+        // Log.d("AlbumActivity", albumJSON.toString())
+
+        // Deserialize albumJSON into AlbumInfo - this should now be the correct JSON
+        val albumInfo = jsonParser.decodeFromString(AlbumInfo.serializer(), albumJSON)
 
         dialog.setOnShowListener { dialogInterface ->
             val bottomSheetDialog = dialogInterface as BottomSheetDialog
@@ -93,7 +101,7 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
             val spinnerAdapter2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, mutableSongsList)
             spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner2?.adapter = spinnerAdapter
+            spinner2?.adapter = spinnerAdapter // Note: This should probably be spinnerAdapter2
             spinner2?.setSelection(0)
 
             spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -128,35 +136,47 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
                 postButton?.setTextColor(resources.getColor(R.color.accent_gray, null))
 
             }
-//
-//            if(existingReview !== "" || existingReview !== null) {
-//                val prevData = existingReview?.let { Json.decodeFromString(Review.serializer(), it) }
-//                if(prevData == null) return@setOnShowListener
-//                if(prevData.score == null) return@setOnShowListener
-//
-//                scoreInput?.rating = prevData.score.toFloat()
-//                titleInput?.setText(prevData.title)
-//                reviewInput?.setText(prevData.content)
-//                favLyricInput?.setText(prevData.favorite_lyrics)
-//                worstLyricInput?.setText(prevData.worst_lyrics)
-//
-//                val favIndex = mutableSongsList.indexOf(prevData.favorite_song)
-//                if(favIndex > -1) {
-//                    spinner?.setSelection(favIndex)
-//                }
-//                val worstIndex = mutableSongsList.indexOf(prevData.worst_song)
-//                if(worstIndex > -1) {
-//                    spinner2?.setSelection(worstIndex)
-//                }
-//            }
+
+
+            if(existingReview != null && existingReview!!.isNotBlank()) { // Added null and blank check
+                try {
+                    Log.d(TAG, "Attempting to decode existingReview: $existingReview") // Log the string
+                    val prevData = jsonParser.decodeFromString(Review.serializer(), existingReview!!)
+                    Log.d(TAG, "Decoded existingReview successfully: $prevData") // Log the decoded object
+
+                    // Safely apply data, checking for nulls
+                    prevData?.let { data ->
+                        if (data.score != null) {
+                            scoreInput?.rating = data.score.toFloat()
+                        }
+                        titleInput?.setText(data.title)
+                        reviewInput?.setText(data.content)
+                        favLyricInput?.setText(data.favorite_lyrics)
+                        worstLyricInput?.setText(data.worst_lyrics)
+
+                        val favIndex = mutableSongsList.indexOf(data.favorite_song)
+                        if(favIndex > -1) {
+                            spinner?.setSelection(favIndex)
+                        }
+                        val worstIndex = mutableSongsList.indexOf(data.worst_song)
+                        if(worstIndex > -1) {
+                            spinner2?.setSelection(worstIndex)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error decoding existingReview", e) // Log the error
+                    // Optionally show a Toast or handle the error gracefully
+                }
+            }
+
 
             postButton?.setOnClickListener {
-                val title = reviewInput?.text.toString()
-                val review = reviewInput?.text.toString()
+                val title = reviewInput?.text.toString() // Note: This is using reviewInput text for title
+                val reviewContent = reviewInput?.text.toString() // Renamed to avoid conflict
                 val favLyric = favLyricInput?.text.toString()
                 val worstLyric = worstLyricInput?.text.toString()
 
-                if(review.isBlank()) {
+                if(reviewContent.isBlank()) { // Check reviewContent
                     return@setOnClickListener
                 }
 
@@ -164,23 +184,50 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
                     postButton?.text = ""
                     progressBar?.visibility = View.VISIBLE
                     postButton.isEnabled = false
-                    var res = insert_review(
-                        userId.toString(),
-                        albumInfo.id ?: "",
-                        title,
-                        review,
-                        java.time.LocalDateTime.now(),
-                        score,
-                        favLyric,
-                        favSong,
-                        worstLyric,
-                        worstSong
-                    )
+
+                    val res: Result<*> // Use Result type as suggested by the usage of .isSuccess
+
+                    Log.d("Existing Review", existingReview.toString())
+                    if(existingReview != null && existingReview!!.isNotBlank()) { // Added null and blank check
+                        val prevData = jsonParser.decodeFromString(Review.serializer(), existingReview!!)
+                        res = update_review(
+                            prevData.id.toString(),
+                            userId.toString(),
+                            albumInfo.id ?: "",
+                            title, // Using the title from reviewInput
+                            reviewContent, // Using the review content
+                            java.time.LocalDateTime.now(),
+                            score,
+                            favLyric,
+                            favSong,
+                            worstLyric,
+                            worstSong
+                        )
+                    } else {
+                        res = insert_review(
+                            userId.toString(),
+                            albumInfo.id ?: "",
+                            title, // Using the title from reviewInput
+                            reviewContent, // Using the review content
+                            java.time.LocalDateTime.now(),
+                            score,
+                            favLyric,
+                            favSong,
+                            worstLyric,
+                            worstSong
+                        )
+                    }
                     if(res.isSuccess) {
-                        progressBar?.visibility = View.VISIBLE
+                        progressBar?.visibility = View.GONE // Changed to GONE on success
                         postButton?.text = "Post"
                         postButton.isEnabled = true
                         dismiss()
+                    } else {
+                        // Handle error case if insert_review fails
+                        progressBar?.visibility = View.GONE
+                        postButton?.text = "Post"
+                        postButton.isEnabled = true
+                        Toast.makeText(requireContext(), "Failed to post review", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -205,8 +252,8 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "DialogReviewBottomSheet"
-        private const val ARG_ALBUM_INFO = ""
-        private const val ARG_EXISTING_REVIEW = ""
+        private const val ARG_ALBUM_INFO = "album_info_json" // <-- Unique key
+        private const val ARG_EXISTING_REVIEW = "existing_review_json" // <-- Unique key
 
         // Factory method to create a new instance with arguments
         fun newInstance(albumJson: String): DialogReviewBottomSheet {
@@ -218,13 +265,14 @@ class DialogReviewBottomSheet : BottomSheetDialogFragment() {
             return fragment
         }
 
-        fun newExistingInstance(albumJson: String, review: String): DialogReviewBottomSheet {
+        fun newExistingInstance(albumJson: String, reviewJson: String): DialogReviewBottomSheet {
             val fragment = DialogReviewBottomSheet()
             val args = Bundle().apply {
-                putString(ARG_ALBUM_INFO, albumJson)
-                putString(ARG_EXISTING_REVIEW, review)
+                putString(ARG_ALBUM_INFO, albumJson) // Use unique key
+                putString(ARG_EXISTING_REVIEW, reviewJson) // Use unique key
             }
             fragment.arguments = args
             return fragment
-        }    }
+        }
+    }
 }

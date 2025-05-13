@@ -28,7 +28,7 @@ class AlbumActivity : AppCompatActivity() {
         }
 
         val albumJSON = intent.getStringExtra("albumInfo") // Assuming you pass the ID  as a String extra
-        val albumInfoFromJSON = albumJSON?.let { Json.decodeFromString(AlbumInfo.serializer(), it) }
+        val albumInfoFromJSON = albumJSON?.let { Json.decodeFromString(AlbumInfo.serializer(), albumJSON) }
         val reviewButton: AppCompatButton = findViewById(R.id.review_button)
 
         lifecycleScope.launch {
@@ -36,26 +36,22 @@ class AlbumActivity : AppCompatActivity() {
                 val review = does_review_exist(MyUserObject.myUserId, albumInfoFromJSON?.id.toString())
 
                 if(review?.id != null || review?.id != "") {
-                    val stringifiedReview = review?.let { Json.encodeToString(Review.serializer(), it) }
+                    val stringifiedReview = review?.let { Json.encodeToString(Review.serializer(), review) }
                     reviewButton.text = "Update Review"
+                    Log.d("AlbumActivity", stringifiedReview.toString())
+                    Log.d("AlbumActivity", albumJSON.toString())
                     reviewButton.setOnClickListener{
-                        val reviewBottomSheet = DialogReviewBottomSheet.newInstance(albumJSON.toString())
-                        reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
-                    }
-//                    reviewButton.setOnClickListener{
-//                        val reviewBottomSheet = DialogReviewBottomSheet.newExistingInstance(albumJSON.toString(), stringifiedReview.toString())
-//                        reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
-//                    }
-                } else {
-                    Log.d("AlbumActivity", "Review does not exist")
-                    reviewButton.text = "Review"
-                    reviewButton.setOnClickListener{
-                        val reviewBottomSheet = DialogReviewBottomSheet.newInstance(albumJSON.toString())
+                        val reviewBottomSheet = DialogReviewBottomSheet.newExistingInstance(albumJSON.toString(), stringifiedReview.toString())
                         reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
                     }
                 }
             } catch (e: Exception) {
-                Log.e("AlbumActivity", e.toString())
+                Log.d("AlbumActivity", "Review does not exist")
+                reviewButton.text = "Review"
+                reviewButton.setOnClickListener{
+                    val reviewBottomSheet = DialogReviewBottomSheet.newInstance(albumJSON.toString())
+                    reviewBottomSheet.show(supportFragmentManager, DialogReviewBottomSheet.TAG)
+                }
             }
         }
 

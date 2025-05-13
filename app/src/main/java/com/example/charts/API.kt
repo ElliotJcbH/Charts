@@ -120,7 +120,7 @@ suspend fun fetch_reviews_for_album(album_id: String): List<Review> = coroutineS
             put("insert_album_id", album_id)
         }
         val res = supabase.postgrest.rpc(
-            "get_reviews_with_album_id",
+            "fetch_reviews_with_album_id",
             parameters = rpcParams
         )
         val reviews = res.decodeList<Review>()
@@ -227,6 +227,43 @@ suspend fun insert_review(
             put("worst_song", worstSong)
         }
         val res = supabase.from("review").insert(review)
+        return Result.success(res)
+    } catch (e: Exception) {
+        print("Error inserting review: ${e.message}")
+        throw(e)
+    }
+}
+
+suspend fun update_review(
+    review_id: String,
+    user_id: String,
+    album_id: String,
+    title: String,
+    content: String,
+    date: java.time.LocalDateTime,
+    score: Float,
+    favoriteLyrics: String,
+    favoriteSong: String,
+    worstLyrics: String,
+    worstSong: String
+): Result<PostgrestResult> {
+    try {
+        Log.d("API", review_id)
+        val review = buildJsonObject {
+            put("title", title)
+            put("content", content)
+            put("date", date.toString())
+            put("score", score)
+            put("favorite_lyrics", favoriteLyrics)
+            put("favorite_song", favoriteSong)
+            put("worst_lyrics", worstLyrics)
+            put("worst_song", worstSong)
+        }
+        val res = supabase.from("review").update(review) {
+            filter {
+                eq("id", review_id)
+            }
+        }
         return Result.success(res)
     } catch (e: Exception) {
         print("Error inserting review: ${e.message}")
